@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade63b95de4746efbc17b4438f792ad7, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  bastionData: {fileID: 11400000, guid: 8e8b0144c968f7d4f8033bfe4e45bfa3, type: 2}
+  spawnInterval: 0.5
+  spawnPosX: 45
+  spawnPosY: 1
+  spawnRangeZ: {x: -10, y: 10}
