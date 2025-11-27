@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8493bd61a8354f8da400dec2a8399a03, type: 3}
+  m_Name: ElvenHightowerData
+  m_EditorClassIdentifier: 
+  attributes:
+    health: 100
+    damage: 12
+    attackSpeed: 1
+    range: 50
+  color: {r: 0.3218979, g: 0.9150943, b: 0.22877358, a: 1}
+  material: {fileID: 2100000, guid: 72411ac389dedb64ca89f9637b6472c0, type: 2}
+  buildingName: Elven Hightower
+  buildingDescription: Elves equipped with longbows. Their farsight and piercing
+    shots are very remarkable.
+  buildingCost: 0
+  buildingSize: {x: 1, y: 4, z: 1}
+  shooterType: 0
+  muzzleType: 1
+  projectilePrefab: {fileID: 1421108624332560070, guid: 9cc27147a8f7d9d4188fbf82aa08f88c, type: 3}

@@ -7,47 +7,56 @@ namespace Core.Gameplay.Entities
 {
     public class Projectile : MonoBehaviour, IDamager
     {
+        private const float Lifetime = 10;
+        [SerializeField] private LayerMask obstacleLayerMask;
+        [SerializeField] private Rigidbody rb;
         [SerializeField] private float speed;
+        [SerializeField] private bool piercingShot;
+        [SerializeField] private Vector3 eulerOffset;
+        [SerializeField] private float destroyDelay = 0f;
         public IDamageable Target { get; set; }
         public float Damage { get; set; }
         public float AttackSpeed { get; set; }
-        
-        private Rigidbody _rb;
         
         public void Initialize(Vector3 direction, float damage)
         {
             Damage = damage;
             if (direction == Vector3.zero) direction = transform.forward;
-            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
-
-            _rb = GetComponent<Rigidbody>();
-            if (_rb != null)
+            if (Mathf.Abs(Vector3.Dot(direction, Vector3.up)) > 0.99f)
             {
-                _rb.velocity = transform.forward * speed;
+                transform.rotation = Quaternion.LookRotation(direction, Vector3.forward) * Quaternion.Euler(eulerOffset);
             }
             else
             {
-                StartCoroutine(MoveRoutine());
+                transform.rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(eulerOffset);
             }
-        }
-
-        private IEnumerator MoveRoutine()
-        {
-            while (Target == null)
+            if (rb != null)
             {
-                transform.Translate(transform.forward * (Time.fixedDeltaTime * speed), Space.Self);
-                yield return new WaitForFixedUpdate();
+                rb.velocity = direction * speed;
             }
+            
+            Destroy(gameObject, Lifetime);
         }
 
         public void Attack()
         {
             Target.TakeDamage(Damage);
-            Destroy(gameObject);
+            if (!piercingShot)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            if ((1 << other.gameObject.layer & obstacleLayerMask.value) > 0)
+            {
+                rb.velocity = Vector3.zero;
+                rb.Sleep();
+                Destroy(gameObject, destroyDelay);
+                return;
+            }
+            
             var damageable = other.GetComponent<IDamageable>();
             if (damageable == null) return;
 

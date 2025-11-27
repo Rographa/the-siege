@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Gameplay.Units;
+using Core.Gameplay.Entities.Units;
 using UnityEngine;
 
 namespace Core.Gameplay.Waves

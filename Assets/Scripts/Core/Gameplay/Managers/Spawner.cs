@@ -1,5 +1,4 @@
 using Core.Gameplay.Entities.Units;
-using Core.Gameplay.Units;
 using UnityEngine;
 
 namespace Core.Gameplay.Managers

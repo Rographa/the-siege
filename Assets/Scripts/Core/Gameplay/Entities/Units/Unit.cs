@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Core.Gameplay.Units;
 using Core.Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,6 +16,7 @@ namespace Core.Gameplay.Entities.Units
 
         public Unit Initialize(UnitData data)
         {
+            if (IsInitialized) return this;
             _loadedData = data;
             Health = _loadedData.Health;
             Damage = _loadedData.Damage;
@@ -29,6 +29,7 @@ namespace Core.Gameplay.Entities.Units
             {
                 color = _loadedData.Color
             };
+            IsInitialized = true;
             return this;
         }
 
@@ -75,7 +76,10 @@ namespace Core.Gameplay.Entities.Units
 
         public override void Die()
         {
+            base.Die();
             agent.isStopped = true;
+            if (_coroutine != null) StopCoroutine(_coroutine);
+            Destroy(gameObject, 0.2f);
         }
 
         public override void Attack()

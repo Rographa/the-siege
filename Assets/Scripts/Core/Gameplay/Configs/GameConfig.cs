@@ -14,12 +14,15 @@ namespace Core.Gameplay.Configs
         [SerializeField] private float spawnPosX = 45;
         [SerializeField] private float spawnPosY = 1;
         [SerializeField] private Vector2 spawnRangeZ = new(-10, 10);
-
+        [SerializeField] private int spawnMultiplierInterval = 5;
+        [SerializeField] private float spawnMultiplierIncrease = 0.5f;
 
         public BastionData BastionData => bastionData;
         public float SpawnInterval => spawnInterval;
         public float SpawnPosX => spawnPosX;
         public float SpawnPosY => spawnPosY;
         public Vector2 SpawnRangeZ => spawnRangeZ;
+        public int SpawnMultiplierInterval => spawnMultiplierInterval;
+        public float SpawnMultiplierIncrease => spawnMultiplierIncrease;
     }
 }

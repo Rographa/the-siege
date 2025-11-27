@@ -17,3 +17,12 @@ MonoBehaviour:
     damage: 10
     attackSpeed: 0.5
     range: 30
+  color: {r: 0.04801533, g: 0.7830189, b: 0.6688566, a: 1}
+  material: {fileID: 2100000, guid: 7d9c95a074690574c9646c8535164795, type: 2}
+  buildingName: Bastion
+  buildingDescription: 
+  buildingCost: 0
+  buildingSize: {x: 5, y: 5, z: 5}
+  shooterType: 0
+  muzzleType: 0
+  projectilePrefab: {fileID: 7675435404712745093, guid: b0703326f4fa1a44bae78cccb0395ea9, type: 3}

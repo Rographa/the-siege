@@ -1,10 +1,12 @@
-﻿using Core.Interfaces;
+﻿using System;
+using Core.Interfaces;
 using UnityEngine;
 
 namespace Core.Gameplay.Entities
 {
     public abstract class Entity : MonoBehaviour, IDamageable, IDamager
     {
+        public event Action<Entity> OnDeath;
         public EntityAttributes attributes = new();
         public Collider mainCollider;
 
@@ -35,6 +37,7 @@ namespace Core.Gameplay.Entities
         public IDamageable Target { get; set; }
         public bool IsDead => Health <= 0;
         protected float LastAttackTime;
+        protected bool IsInitialized;
         
         public Transform GetTransform()
         {
@@ -43,6 +46,7 @@ namespace Core.Gameplay.Entities
 
         public float GetDistance(Entity other)
         {
+            if (IsDead) return Mathf.Infinity;
             var closestPoint = GetClosestPoint(other);
             var otherClosestPoint = other.GetClosestPoint(this);
             
@@ -51,6 +55,7 @@ namespace Core.Gameplay.Entities
 
         public Vector3 GetClosestPoint(Entity other)
         {
+            if (other == null || other.mainCollider == null) return Vector3.zero;
             return other.mainCollider.ClosestPoint(transform.position);
         }
         
@@ -68,10 +73,11 @@ namespace Core.Gameplay.Entities
         {
             attributes = new EntityAttributes(reference);
         }
-        
-        public abstract void Die();
 
-        
+        public virtual void Die()
+        {
+            OnDeath?.Invoke(this);
+        }
 
         public abstract void Attack();
     }

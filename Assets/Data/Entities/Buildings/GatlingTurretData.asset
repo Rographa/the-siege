@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8493bd61a8354f8da400dec2a8399a03, type: 3}
+  m_Name: GatlingTurretData
+  m_EditorClassIdentifier: 
+  attributes:
+    health: 100
+    damage: 1
+    attackSpeed: 6
+    range: 15
+  color: {r: 0.8018868, g: 0.17777678, b: 0.57416534, a: 1}
+  material: {fileID: 2100000, guid: 583fef925f2d7a242a8715f1bc17bcd4, type: 2}
+  buildingName: Gatling Turret
+  buildingDescription: A turret equipped with gatling guns. Pretty intuitive.
+  buildingCost: 0
+  buildingSize: {x: 6, y: 3, z: 6}
+  shooterType: 0
+  muzzleType: 1
+  projectilePrefab: {fileID: 7675435404712745093, guid: b0703326f4fa1a44bae78cccb0395ea9, type: 3}

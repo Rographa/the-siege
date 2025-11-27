@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770083ca6e3546b5ba70ef2ec3bceaee, type: 3}
-  m_Name: WaveData
+  m_Script: {fileID: 11500000, guid: 985e80ec26334ed4b80a47e59b94eaa2, type: 3}
+  m_Name: Orc
   m_EditorClassIdentifier: 
-  nodes:
-  - unit: {fileID: 11400000, guid: b899a0ebfa848ac41a0ffa5b4a8afe37, type: 2}
-    quantity: 5
-  - unit: {fileID: 11400000, guid: aa74a746f892813409198b0c21e3638d, type: 2}
-    quantity: 5
+  attributes:
+    health: 120
+    damage: 10
+    attackSpeed: 0.2
+    range: 1
+  color: {r: 0.43504623, g: 0.6320754, b: 0.0506853, a: 1}
+  material: {fileID: 0}
+  moveSpeed: 1.5
