@@ -14,6 +14,7 @@ namespace Core.Gameplay.Entities.Units
 
         private UnitData _loadedData;
         private Coroutine _coroutine;
+        private Coroutine _hitEffectCoroutine;
 
         public Unit Initialize(UnitData data, float difficultyMultiplier = 1f)
         {
@@ -24,6 +25,7 @@ namespace Core.Gameplay.Entities.Units
             AttackSpeed = _loadedData.AttackSpeed * difficultyMultiplier;
             agent.speed = _loadedData.MoveSpeed * difficultyMultiplier;
             Range = _loadedData.Range;
+            transform.localScale = Vector3.one * data.UnitSize;
             //agent.stoppingDistance = _loadedData.Range;
             
             meshRenderer.material = new Material(meshRenderer.material)
@@ -31,7 +33,21 @@ namespace Core.Gameplay.Entities.Units
                 color = _loadedData.Color
             };
             IsInitialized = true;
+            OnDamageTaken += HandleDamageTaken;
             return this;
+        }
+
+        private void HandleDamageTaken(Entity _)
+        {
+            if (_hitEffectCoroutine != null) StopCoroutine(_hitEffectCoroutine);
+            _hitEffectCoroutine = StartCoroutine(HitEffect());
+        }
+
+        private IEnumerator HitEffect()
+        {
+            meshRenderer.material.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            meshRenderer.material.color = _loadedData.Color;
         }
 
         public void SetTarget(IDamageable target)
@@ -90,7 +106,7 @@ namespace Core.Gameplay.Entities.Units
 
         public override void Attack()
         {
-            Target.TakeDamage(attributes.damage);
+            Target.TakeDamage(Damage);
         }
     }
 }

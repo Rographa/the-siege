@@ -131,18 +131,19 @@ MonoBehaviour:
     damage: 0
     attackSpeed: 0
     range: 0
-  mainCollider: {fileID: 7344595835539306535}
+  mainCollider: {fileID: 4675648219810357002}
   rangeCollider: {fileID: 2202718876832327610}
   enemyTag: Enemy
   shooter: {fileID: 1187766289244541860}
   visuals: {fileID: 357546208750670727}
+  level: 0
 --- !u!135 &2202718876832327610 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 9084872303140012601, guid: f9cf02af8114f4a4180ecd1d7d69d4c6, type: 3}
   m_PrefabInstance: {fileID: 6954211055829607811}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7344595835539306535 stripped
+--- !u!65 &4675648219810357002 stripped
 BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 391651419112037796, guid: f9cf02af8114f4a4180ecd1d7d69d4c6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2333268491738200713, guid: f9cf02af8114f4a4180ecd1d7d69d4c6, type: 3}
   m_PrefabInstance: {fileID: 6954211055829607811}
   m_PrefabAsset: {fileID: 0}

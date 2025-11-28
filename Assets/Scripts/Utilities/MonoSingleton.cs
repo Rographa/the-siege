@@ -35,8 +35,8 @@ namespace Utilities
         {
             if (_instance != null && _instance.IsInitialized && _instance != (T)this)
             {
-                Destroy(this.gameObject);
-                return;
+                Destroy(_instance.gameObject);
+                _instance = (T)this;
             }
             if (!IsInitialized)
             {

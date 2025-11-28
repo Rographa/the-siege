@@ -22,6 +22,8 @@ namespace Core.Gameplay.Configs
         [SerializeField] private float spawnMultiplierIncrease = 0.5f;
         [SerializeField] private int difficultyMultiplierInterval = 10;
         [SerializeField] private float difficultyMultiplierIncrease = 1f;
+        [SerializeField] private float upgradeBaseCost = 80;
+        [SerializeField] private float upgradeGrowthRate = 1.5f;
 
         public BastionData BastionData => bastionData;
         public float SpawnInterval => spawnInterval;
@@ -33,5 +35,7 @@ namespace Core.Gameplay.Configs
         public int DifficultyMultiplierInterval => difficultyMultiplierInterval;
         public float DifficultyMultiplierIncrease => difficultyMultiplierIncrease;
         public float StartCurrency => startCurrency;
+        public float UpgradeBaseCost => upgradeBaseCost;
+        public float UpgradeGrowthRate => upgradeGrowthRate;
     }
 }

@@ -20,4 +20,5 @@ MonoBehaviour:
   color: {r: 0.43504623, g: 0.6320754, b: 0.0506853, a: 1}
   material: {fileID: 0}
   moveSpeed: 1.5
+  unitSize: 1.25
   currencyRewardRange: {x: 4, y: 12}

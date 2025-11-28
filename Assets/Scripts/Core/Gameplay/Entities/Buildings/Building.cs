@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Gameplay.Entities.Components;
 using Core.Gameplay.Entities.Units;
+using Core.Gameplay.Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utilities;
+using Random = UnityEngine.Random;
 
 namespace Core.Gameplay.Entities.Buildings
 {
@@ -19,31 +22,98 @@ namespace Core.Gameplay.Entities.Buildings
         [GetComponent(true)] protected MeshRenderer MeshRenderer;
 
         protected List<Unit> EnemiesInRange = new();
+        public int level;
 
         public BuildingData LoadedData
         {
             get;
             protected set;
         }
-        
-        
+
+        private void OnEnable()
+        {
+            HandleSubscription(true);
+        }
+
+        private void OnDisable()
+        {
+            HandleSubscription(false);
+        }
+
+        private void HandleSubscription(bool subscribe)
+        {
+            switch (subscribe)
+            {
+                case true:
+                    GameManager.OnWaveStarted += HandleWaveStarted;
+                    break;
+                case false:
+                    GameManager.OnWaveStarted -= HandleWaveStarted;
+                    break;
+            }
+        }
+
+        private void HandleWaveStarted(int waveNumber)
+        {
+            Deteriorate();
+        }
+
+        private void Deteriorate()
+        {
+            var damage = Random.Range(LoadedData.DeteriorationRange.x, LoadedData.DeteriorationRange.y) * GameManager.DifficultyMultiplier;
+            TakeDamage(damage);
+        }
+
+
         public void Initialize(BuildingData data)
         {
             if (IsInitialized) return;
             ComponentInjector.InjectComponents(this);
             LoadedData = data;
+            level = 1;
             MeshRenderer.material = new Material(data.Material)
             {
                 color = data.Color
             };
             SetAttributes(data.Attributes);
             SetSize(data.Size);
-            rangeCollider.radius = Range;
             rangeCollider.isTrigger = true;
             shooter.Initialize(this);
             IsInitialized = true;
             OnBuildingInitialized?.Invoke(this);
             StartCoroutine(AttackEnemiesInRange());
+        }
+
+        public void LevelUp()
+        {
+            var newAttributes = new EntityAttributes()
+            {
+                attackSpeed = LoadedData.AttackSpeed +
+                              LoadedData.AttackSpeed * LoadedData.UpgradeBoost.attackSpeed * level,
+                damage = LoadedData.Damage + LoadedData.Damage * LoadedData.UpgradeBoost.damage * level,
+                health = LoadedData.Health + LoadedData.Health * LoadedData.UpgradeBoost.health * level,
+                range = LoadedData.Range + LoadedData.Range * LoadedData.UpgradeBoost.range * level,
+            };
+            SetAttributes(newAttributes);
+            level++;
+        }
+
+        protected override void SetAttributes(EntityAttributes reference)
+        {
+            base.SetAttributes(reference);
+            rangeCollider.radius = Range;
+        }
+
+        public float GetUpgradeCost()
+        {
+            return (LoadedData.BaseCost > 0 ? LoadedData.BaseCost : GameManager.GameConfig.UpgradeBaseCost) *
+                   Mathf.Pow(GameManager.GameConfig.UpgradeGrowthRate, level - 1);
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            Destroy(gameObject);
         }
 
         private void SetSize(Vector3 size)
@@ -54,8 +124,7 @@ namespace Core.Gameplay.Entities.Buildings
 
         private IEnumerator AttackEnemiesInRange()
         {
-            var attackCooldown = 1f / attributes.attackSpeed;
-            while (true)
+            while (!IsDead)
             {
                 while (EnemiesInRange.Count > 0)
                 {
@@ -69,7 +138,7 @@ namespace Core.Gameplay.Entities.Buildings
                         GetNextTarget();
                     }
                     Attack();
-                    LastAttackTime = Time.time + attackCooldown;
+                    LastAttackTime = Time.time + 1f / AttackSpeed;
                 }
 
                 yield return new WaitForEndOfFrame();

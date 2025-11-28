@@ -18,7 +18,7 @@ MonoBehaviour:
     attackSpeed: 1.5
     range: 25
   color: {r: 0.19290671, g: 0.5176586, b: 0.8018868, a: 1}
-  material: {fileID: 2100000, guid: c6c8663b24b41e448a616e625f8c410e, type: 2}
+  material: {fileID: 2100000, guid: 7d9c95a074690574c9646c8535164795, type: 2}
   buildingName: Wizard Tower
   buildingDescription: Powerful wizards that cast lightning strikes into incoming
     enemies.
@@ -28,4 +28,9 @@ MonoBehaviour:
   muzzleType: 0
   projectilePrefab: {fileID: 0}
   priceIncreasePerBuilding: 0.7
-  upgradeBoost: 0.2
+  upgradeBoost:
+    health: 0.2
+    damage: 0.2
+    attackSpeed: 0.3
+    range: 0.1
+  deteriorationRange: {x: 5, y: 9.25}

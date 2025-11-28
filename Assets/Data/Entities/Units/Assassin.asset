@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985e80ec26334ed4b80a47e59b94eaa2, type: 3}
+  m_Name: Assassin
+  m_EditorClassIdentifier: 
+  attributes:
+    health: 10
+    damage: 7
+    attackSpeed: 0.8
+    range: 1
+  color: {r: 0.4994433, g: 0.09189212, b: 0.5566038, a: 1}
+  material: {fileID: 0}
+  moveSpeed: 5
+  unitSize: 0.9
+  currencyRewardRange: {x: 3, y: 5}

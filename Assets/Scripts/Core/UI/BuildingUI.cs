@@ -1,5 +1,7 @@
 ﻿using System;
+using Core.Gameplay.Entities;
 using Core.Gameplay.Entities.Buildings;
+using Core.Gameplay.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +16,8 @@ namespace Core.UI
         private const string AttackSpeed = "Attack Speed: ";
         private const string Range = "Range: ";
         private const string Health = "Health: ";
+        private const string Level = "Lv. ";
+        private const string LevelUpCost = "[LMB] Level Up - ${0}";
 
         [SerializeField] private Button button;
         [SerializeField] private TextMeshProUGUI buildingName;
@@ -23,9 +27,11 @@ namespace Core.UI
         [SerializeField] private TextMeshProUGUI buildingRange;
         [SerializeField] private TextMeshProUGUI buildingHealth;
         [SerializeField] private TextMeshProUGUI buildingCost;
+        [SerializeField] private TextMeshProUGUI buildingLevelUpCost;
         [SerializeField] private Image[] backgrounds;
 
         private BuildingData _buildingData;
+        private Building _currentBuilding;
         
         public void Initialize(BuildingData data)
         {
@@ -52,18 +58,42 @@ namespace Core.UI
         public void SetBuilding(Building building)
         {
             _buildingData = building.LoadedData;
+            _currentBuilding = building;
+            _currentBuilding.OnDamageTaken += UpdateData;
             buildingName.SetText(_buildingData.Name);
             buildingDescription.SetText(_buildingData.Description);
-            buildingDamage.SetText($"{Damage}{building.Damage:N1}");
-            buildingAttackSpeed.SetText($"{AttackSpeed}{building.AttackSpeed:N1}");
-            buildingRange.SetText($"{Range}{building.Range:N1}");
-            buildingHealth.SetText($"{Health}{building.Health:N1}");
-            buildingCost.transform.parent.gameObject.SetActive(false);
+            UpdateData(building);
+            
             foreach (var background in backgrounds)
             {
                 background.color = _buildingData.Color;    
             }
             button.enabled = false;
+        }
+
+        public void Clear()
+        {
+            if (_currentBuilding != null)
+            {
+                _currentBuilding.OnDamageTaken -= UpdateData;
+                _currentBuilding = null;
+            }   
+        }
+
+        public void UpdateData(Building building)
+        {
+            buildingDamage.SetText($"{Damage}{building.Damage:N1}");
+            buildingAttackSpeed.SetText($"{AttackSpeed}{building.AttackSpeed:N1}");
+            buildingRange.SetText($"{Range}{building.Range:N1}");
+            buildingHealth.SetText($"{Health}{building.Health:N1}");
+            buildingCost.SetText($"{Level}{building.level:00}");
+            buildingLevelUpCost.SetText(string.Format(LevelUpCost, building.GetUpgradeCost()));
+        }
+
+        private void UpdateData(Entity entity)
+        {
+            if (entity is not Building building) return;
+            UpdateData(building);
         }
     }
 }

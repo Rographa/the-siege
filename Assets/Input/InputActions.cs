@@ -122,15 +122,6 @@ namespace Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""f533910d-a9d4-42bc-8242-7d6087de4d7c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Position"",
                     ""type"": ""Value"",
                     ""id"": ""c8f06446-f13d-4824-850d-f4918bf7c0d2"",
@@ -140,16 +131,7 @@ namespace Input
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Next"",
-                    ""type"": ""Button"",
-                    ""id"": ""afcf97f7-181d-4f53-ab8c-04d26657fdcc"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Previous"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""6b8b563b-b0bc-422e-a99e-0693e53d0f50"",
                     ""expectedControlType"": """",
@@ -220,116 +202,6 @@ namespace Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
-                    ""id"": ""b6b1b7d4-facd-4786-a9b8-5203c1addc96"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""5ac49a19-1ebe-44e9-8b2e-72f8efd176dd"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""02aac3b2-75b8-401f-905d-4a8383facc30"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""13845ac1-8022-470e-9d7c-c89d1043037f"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""3f6f787e-a0a2-42f2-9db4-fe7eb0fc6ced"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Arrows"",
-                    ""id"": ""bc045a42-9cb3-4887-be19-778c59e96490"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""591b0624-54e0-438d-a47b-1f6feeb6d3a3"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""a1f871aa-bfad-474b-a250-c40ea32cc39e"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""0e49b6a0-a0a6-4648-8267-2f397442b58d"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""15abbd69-6b15-4c1a-9b02-3bac5df5b4c8"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""17876ed9-a2d8-4563-b94a-5fcdb912e607"",
                     ""path"": ""<Mouse>/position"",
@@ -342,23 +214,12 @@ namespace Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8d5386b0-d508-4a3a-b031-3d4417813bed"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Next"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""168103a6-1144-4b11-abfb-b58f55d69060"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""Previous"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -422,10 +283,8 @@ namespace Input
             m_Gameplay_Confirm = m_Gameplay.FindAction("Confirm", throwIfNotFound: true);
             m_Gameplay_Cancel = m_Gameplay.FindAction("Cancel", throwIfNotFound: true);
             m_Gameplay_BuildMode = m_Gameplay.FindAction("BuildMode", throwIfNotFound: true);
-            m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
             m_Gameplay_Position = m_Gameplay.FindAction("Position", throwIfNotFound: true);
-            m_Gameplay_Next = m_Gameplay.FindAction("Next", throwIfNotFound: true);
-            m_Gameplay_Previous = m_Gameplay.FindAction("Previous", throwIfNotFound: true);
+            m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
             m_Gameplay_NormalSpeed = m_Gameplay.FindAction("NormalSpeed", throwIfNotFound: true);
             m_Gameplay_FastSpeed = m_Gameplay.FindAction("FastSpeed", throwIfNotFound: true);
             m_Gameplay_FastestSpeed = m_Gameplay.FindAction("FastestSpeed", throwIfNotFound: true);
@@ -512,10 +371,8 @@ namespace Input
         private readonly InputAction m_Gameplay_Confirm;
         private readonly InputAction m_Gameplay_Cancel;
         private readonly InputAction m_Gameplay_BuildMode;
-        private readonly InputAction m_Gameplay_Move;
         private readonly InputAction m_Gameplay_Position;
-        private readonly InputAction m_Gameplay_Next;
-        private readonly InputAction m_Gameplay_Previous;
+        private readonly InputAction m_Gameplay_Pause;
         private readonly InputAction m_Gameplay_NormalSpeed;
         private readonly InputAction m_Gameplay_FastSpeed;
         private readonly InputAction m_Gameplay_FastestSpeed;
@@ -543,21 +400,13 @@ namespace Input
             /// </summary>
             public InputAction @BuildMode => m_Wrapper.m_Gameplay_BuildMode;
             /// <summary>
-            /// Provides access to the underlying input action "Gameplay/Move".
-            /// </summary>
-            public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-            /// <summary>
             /// Provides access to the underlying input action "Gameplay/Position".
             /// </summary>
             public InputAction @Position => m_Wrapper.m_Gameplay_Position;
             /// <summary>
-            /// Provides access to the underlying input action "Gameplay/Next".
+            /// Provides access to the underlying input action "Gameplay/Pause".
             /// </summary>
-            public InputAction @Next => m_Wrapper.m_Gameplay_Next;
-            /// <summary>
-            /// Provides access to the underlying input action "Gameplay/Previous".
-            /// </summary>
-            public InputAction @Previous => m_Wrapper.m_Gameplay_Previous;
+            public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
             /// <summary>
             /// Provides access to the underlying input action "Gameplay/NormalSpeed".
             /// </summary>
@@ -605,18 +454,12 @@ namespace Input
                 @BuildMode.started += instance.OnBuildMode;
                 @BuildMode.performed += instance.OnBuildMode;
                 @BuildMode.canceled += instance.OnBuildMode;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
                 @Position.started += instance.OnPosition;
                 @Position.performed += instance.OnPosition;
                 @Position.canceled += instance.OnPosition;
-                @Next.started += instance.OnNext;
-                @Next.performed += instance.OnNext;
-                @Next.canceled += instance.OnNext;
-                @Previous.started += instance.OnPrevious;
-                @Previous.performed += instance.OnPrevious;
-                @Previous.canceled += instance.OnPrevious;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
                 @NormalSpeed.started += instance.OnNormalSpeed;
                 @NormalSpeed.performed += instance.OnNormalSpeed;
                 @NormalSpeed.canceled += instance.OnNormalSpeed;
@@ -646,18 +489,12 @@ namespace Input
                 @BuildMode.started -= instance.OnBuildMode;
                 @BuildMode.performed -= instance.OnBuildMode;
                 @BuildMode.canceled -= instance.OnBuildMode;
-                @Move.started -= instance.OnMove;
-                @Move.performed -= instance.OnMove;
-                @Move.canceled -= instance.OnMove;
                 @Position.started -= instance.OnPosition;
                 @Position.performed -= instance.OnPosition;
                 @Position.canceled -= instance.OnPosition;
-                @Next.started -= instance.OnNext;
-                @Next.performed -= instance.OnNext;
-                @Next.canceled -= instance.OnNext;
-                @Previous.started -= instance.OnPrevious;
-                @Previous.performed -= instance.OnPrevious;
-                @Previous.canceled -= instance.OnPrevious;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
                 @NormalSpeed.started -= instance.OnNormalSpeed;
                 @NormalSpeed.performed -= instance.OnNormalSpeed;
                 @NormalSpeed.canceled -= instance.OnNormalSpeed;
@@ -742,13 +579,6 @@ namespace Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnBuildMode(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnMove(InputAction.CallbackContext context);
-            /// <summary>
             /// Method invoked when associated input action "Position" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -756,19 +586,12 @@ namespace Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPosition(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "Next" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnNext(InputAction.CallbackContext context);
-            /// <summary>
-            /// Method invoked when associated input action "Previous" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnPrevious(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "NormalSpeed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

@@ -11,6 +11,8 @@ using TMPro;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Utilities;
 using Random = UnityEngine.Random;
 
@@ -18,6 +20,7 @@ namespace Core.Gameplay.Managers
 {
     public class GameManager : MonoSingleton<GameManager>
     {
+        public static event Action<int> OnWaveStarted;
         public static event Action<float> OnCurrencyChanged;
         [SerializeField] private Camera gameCamera;
         [SerializeField] private NavMeshSurface surface;
@@ -27,17 +30,28 @@ namespace Core.Gameplay.Managers
         [SerializeField] private Bastion bastion;
         [SerializeField] private List<WaveData> waveList;
         [SerializeField] private TextMeshProUGUI currencyText;
-        [SerializeField] private BuildingTooltipUI buildingTooltip;
-        [SerializeField] private LayerMask buildingLayerMask;
-
+        [SerializeField] private TextMeshProUGUI waveNumberText;
+        [SerializeField] private UIController gameOverScreen;
+        [SerializeField] private UIController pauseScreen;
+        [SerializeField] private Button[] resumeButtons;
+        [SerializeField] private Button[] restartButtons;
+        [SerializeField] private Button[] quitButtons;
+        
         private WaveData _currentWave;
         private List<Unit> _spawnedUnits;
 
         private int _waveNumber;
+        private float _previousGameSpeed;
         private float _waveQuantityMultiplier;
         private float _waveDifficultyMultiplier;
         private float _currency;
+        private bool _isGameOver;
+        private bool _isPaused;
 
+        private const string Wave = "Wave {0}";
+
+        public static GameConfig GameConfig => Instance.config;
+        public static float DifficultyMultiplier => Instance._waveDifficultyMultiplier;
         private float Currency
         {
             get => _currency;
@@ -75,71 +89,124 @@ namespace Core.Gameplay.Managers
                     InputManager.OnNormalSpeedInput += HandleNormalSpeedInput;
                     InputManager.OnFastSpeedInput += HandleFastSpeedInput;
                     InputManager.OnFastestSpeedInput += HandleFastestSpeedInput;
-                    InputManager.OnPositionInput += HandlePositionInput;
+                    InputManager.OnPauseInput += HandlePauseInput;
                     Building.OnBuildingInitialized += HandleBuildingInitialized;
                     OnCurrencyChanged += HandleCurrencyChanged;
+                    bastion.OnDeath += HandleGameOver;
+                    foreach (var resumeButton in resumeButtons)
+                    {
+                        resumeButton.onClick.AddListener(Resume);
+                    }
+                    
+                    foreach (var restartButton in restartButtons)
+                    {
+                        restartButton.onClick.AddListener(Restart);    
+                    }
+
+                    foreach (var quitButton in quitButtons)
+                    {
+                        quitButton.onClick.AddListener(ReturnToMenu);
+                    }
                     
                     break;
                 case false:
                     InputManager.OnNormalSpeedInput -= HandleNormalSpeedInput;
                     InputManager.OnFastSpeedInput -= HandleFastSpeedInput;
                     InputManager.OnFastestSpeedInput -= HandleFastestSpeedInput;
+                    InputManager.OnPauseInput -= HandlePauseInput;
                     Building.OnBuildingInitialized -= HandleBuildingInitialized;
-                    InputManager.OnPositionInput -= HandlePositionInput;
                     OnCurrencyChanged -= HandleCurrencyChanged;
+                    bastion.OnDeath -= HandleGameOver;
+                    foreach (var resumeButton in resumeButtons)
+                    {
+                        resumeButton.onClick.RemoveAllListeners();
+                    }
+                    
+                    foreach (var restartButton in restartButtons)
+                    {
+                        restartButton.onClick.RemoveAllListeners();    
+                    }
+
+                    foreach (var quitButton in quitButtons)
+                    {
+                        quitButton.onClick.RemoveAllListeners();
+                    }
                     break;
             }
         }
 
-        private void HandlePositionInput(InputAction.CallbackContext context)
+
+        private void Resume()
         {
-            if (!context.performed) return;
-            TooltipRaycast(context.ReadValue<Vector2>());
+            SetPause(false);
         }
 
-        private void TooltipRaycast(Vector2 screenPos)
+        private void SetPause(bool pause)
         {
-           var ray = gameCamera.ScreenPointToRay(screenPos);
-           if (Physics.Raycast(ray, out var hit, 1000, buildingLayerMask, QueryTriggerInteraction.Ignore))
-           {
-               if (hit.transform.TryGetComponent(out Building building))
-               {
-                   UnityEngine.Debug.Log($"{building.LoadedData.Name}");
-                   buildingTooltip.SetBuilding(building, screenPos, gameCamera);
-               }
-               else
-               {
-                   buildingTooltip.Clear();
-               }
-           }
-           else
-           {
-               buildingTooltip.Clear();
-           }
+            UnityEngine.Debug.Log($"Pause: {pause}");
+            SetGameSpeed(pause ? 0 : _previousGameSpeed);
+            pauseScreen.ShowHide(pause);
+            _isPaused = pause;
+        }
+
+        private void Restart()
+        {
+            SetGameSpeed(1);
+            var scene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(scene);
+        }
+
+        private void ReturnToMenu()
+        {
+            SetGameSpeed(1);
+            SceneManager.LoadScene(0);
+        }
+
+        private void HandleGameOver(Entity _)
+        {
+            SetGameSpeed(0);
+            _isGameOver = true;
+            gameOverScreen.Show();
         }
 
         private void HandleCurrencyChanged(float _)
         {
             currencyText.SetText($"${Currency:0.00}");
         }
+        
+        
+        private void HandlePauseInput(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            
+            SetPause(!_isPaused);
+        }
 
         private void HandleNormalSpeedInput(InputAction.CallbackContext context)
         {
+            if (_isGameOver) return;
             SetGameSpeed(1);
         }
 
         private void HandleFastSpeedInput(InputAction.CallbackContext context)
         {
+            if (_isGameOver) return;
             SetGameSpeed(2);
         }
 
         private void HandleFastestSpeedInput(InputAction.CallbackContext context)
         {
+            if (_isGameOver) return;
             SetGameSpeed(4);
         }
 
         private void SetGameSpeed(float speed)
         {
+            if (Time.timeScale > 0)
+            {
+                _previousGameSpeed = Time.timeScale;
+            }
+
             Time.timeScale = speed;
         }
 
@@ -151,6 +218,8 @@ namespace Core.Gameplay.Managers
         private void StartGame()
         {
             bastion.Initialize(config.BastionData);
+            _isGameOver = _isPaused = false;
+            SetGameSpeed(1);
             StartCoroutine(HandleWave());
         }
 
@@ -168,6 +237,8 @@ namespace Core.Gameplay.Managers
                 UpdateProgression();
                 _currentWave = GetWave();
                 _waveNumber++;
+                waveNumberText.SetText(string.Format(Wave, _waveNumber.ToString()));
+                OnWaveStarted?.Invoke(_waveNumber);
                 var unitDict = _currentWave.GetUnits(_waveQuantityMultiplier);
                 foreach (var kvp in unitDict)
                 {

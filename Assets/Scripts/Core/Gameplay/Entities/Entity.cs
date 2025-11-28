@@ -6,7 +6,8 @@ namespace Core.Gameplay.Entities
 {
     public abstract class Entity : MonoBehaviour, IDamageable, IDamager
     {
-        public event Action<Entity> OnDeath;
+        public Action<Entity> OnDeath;
+        public event Action<Entity> OnDamageTaken;
         public EntityAttributes attributes = new();
         public Collider mainCollider;
 
@@ -67,9 +68,10 @@ namespace Core.Gameplay.Entities
             {
                 Die();
             }
+            OnDamageTaken?.Invoke(this);
         }
 
-        protected void SetAttributes(EntityAttributes reference)
+        protected virtual void SetAttributes(EntityAttributes reference)
         {
             attributes = new EntityAttributes(reference);
         }

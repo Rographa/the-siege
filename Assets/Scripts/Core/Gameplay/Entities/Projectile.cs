@@ -14,6 +14,7 @@ namespace Core.Gameplay.Entities
         [SerializeField] private bool piercingShot;
         [SerializeField] private Vector3 eulerOffset;
         [SerializeField] private float destroyDelay = 0f;
+        [SerializeField] private ParticleSystem vfx;
         public IDamageable Target { get; set; }
         public float Damage { get; set; }
         public float AttackSpeed { get; set; }
@@ -22,14 +23,9 @@ namespace Core.Gameplay.Entities
         {
             Damage = damage;
             if (direction == Vector3.zero) direction = transform.forward;
-            if (Mathf.Abs(Vector3.Dot(direction, Vector3.up)) > 0.99f)
-            {
-                transform.rotation = Quaternion.LookRotation(direction, Vector3.forward) * Quaternion.Euler(eulerOffset);
-            }
-            else
-            {
-                transform.rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(eulerOffset);
-            }
+            direction = direction.normalized;
+            transform.forward = direction;
+            transform.rotation *= Quaternion.Euler(eulerOffset);
             if (rb != null)
             {
                 rb.velocity = direction * speed;
@@ -43,7 +39,18 @@ namespace Core.Gameplay.Entities
             Target.TakeDamage(Damage);
             if (!piercingShot)
             {
+                CheckVFX();
                 Destroy(gameObject);
+            }
+        }
+
+        private void CheckVFX()
+        {
+            if (vfx != null)
+            {
+                vfx.transform.parent = null;
+                vfx.Stop();
+                Destroy(vfx.gameObject, 1f);
             }
         }
 
@@ -53,6 +60,7 @@ namespace Core.Gameplay.Entities
             {
                 rb.velocity = Vector3.zero;
                 rb.Sleep();
+                CheckVFX();
                 Destroy(gameObject, destroyDelay);
                 return;
             }

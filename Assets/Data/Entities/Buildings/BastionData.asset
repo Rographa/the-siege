@@ -20,11 +20,16 @@ MonoBehaviour:
   color: {r: 0.04801533, g: 0.7830189, b: 0.6688566, a: 1}
   material: {fileID: 2100000, guid: 7d9c95a074690574c9646c8535164795, type: 2}
   buildingName: Bastion
-  buildingDescription: 
+  buildingDescription: The core of your realm! Protect it with your life!
   buildingCost: 0
   buildingSize: {x: 5, y: 5, z: 5}
   shooterType: 0
   muzzleType: 0
-  projectilePrefab: {fileID: 7675435404712745093, guid: b0703326f4fa1a44bae78cccb0395ea9, type: 3}
+  projectilePrefab: {fileID: 8756226716436746670, guid: 85e20e06864718b4eb89bf24a669b8c4, type: 3}
   priceIncreasePerBuilding: 0
-  upgradeBoost: 0.2
+  upgradeBoost:
+    health: 0.1
+    damage: 0.3
+    attackSpeed: 0.2
+    range: 0.1
+  deteriorationRange: {x: 0, y: 0}

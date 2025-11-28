@@ -8,7 +8,8 @@ namespace Core.Gameplay.Entities.Buildings
     {
         public override void Die()
         {
-            throw new System.NotImplementedException();
+            OnDeath?.Invoke(this);
+            UnityEngine.Debug.Log("Game Over.");
         }
     }
 }

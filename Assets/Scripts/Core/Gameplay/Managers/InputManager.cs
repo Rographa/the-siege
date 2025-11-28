@@ -6,29 +6,31 @@ using Utilities;
 
 namespace Core.Gameplay.Managers
 {
-    public class InputManager : MonoSingleton<InputManager>, InputActions.IGameplayActions
+    public class InputManager : MonoBehaviour, InputActions.IGameplayActions
     {
         public static event Action<InputAction.CallbackContext> OnConfirmInput;
         public static event Action<InputAction.CallbackContext> OnCancelInput;
         public static event Action<InputAction.CallbackContext> OnBuildModeInput;
-        public static event Action<InputAction.CallbackContext> OnMoveInput;
         public static event Action<InputAction.CallbackContext> OnPositionInput;
-        public static event Action<InputAction.CallbackContext> OnNextInput;
-        public static event Action<InputAction.CallbackContext> OnPreviousInput;
+        public static event Action<InputAction.CallbackContext> OnPauseInput;
         public static event Action<InputAction.CallbackContext> OnNormalSpeedInput;
         public static event Action<InputAction.CallbackContext> OnFastSpeedInput;
         public static event Action<InputAction.CallbackContext> OnFastestSpeedInput;
         
         private InputActions _controls;
-        protected override void Init()
+        private void Awake()
         {
-            base.Init();
             if (_controls == null)
             {
                 _controls = new InputActions();
                 _controls.Gameplay.SetCallbacks(this);
             }
             _controls.Enable();
+        }
+
+        private void OnDestroy()
+        {
+            _controls.Disable();
         }
 
         public void OnConfirm(InputAction.CallbackContext context)
@@ -46,24 +48,14 @@ namespace Core.Gameplay.Managers
            OnBuildModeInput?.Invoke(context); 
         }
 
-        public void OnMove(InputAction.CallbackContext context)
-        {
-            OnMoveInput?.Invoke(context);
-        }
-
         public void OnPosition(InputAction.CallbackContext context)
         {
             OnPositionInput?.Invoke(context);
         }
 
-        public void OnNext(InputAction.CallbackContext context)
+        public void OnPause(InputAction.CallbackContext context)
         {
-            OnNextInput?.Invoke(context);
-        }
-
-        public void OnPrevious(InputAction.CallbackContext context)
-        {
-            OnPreviousInput?.Invoke(context);
+            OnPauseInput?.Invoke(context);
         }
 
         public void OnNormalSpeed(InputAction.CallbackContext context)

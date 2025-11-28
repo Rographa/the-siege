@@ -12,22 +12,23 @@ namespace Core.Gameplay.Managers
         [SerializeField] private Color availableColor;
         [SerializeField] private Color unavailableColor;
         [SerializeField] private Building buildingPrefab;
+        [SerializeField] private LayerMask buildingLayerMask;
         [SerializeField] private LayerMask obstacleLayerMask;
         [SerializeField] private LayerMask buildableLayerMask;
         [SerializeField] private Transform ghostBuilding;
         [SerializeField] private Camera gameCamera;
         [SerializeField] private List<BuildingData> buildingCatalog;
         [SerializeField] private CatalogUI catalogUI;
+        [SerializeField] private BuildingTooltipUI buildingTooltip;
 
-        private BuildingData _selectedBuilding;
+        private BuildingData _selectedBuildingData;
+        private Building _selectedBuilding;
         private Vector2 _lastPositionInput;
-        private BoxCollider _ghostBuildingCollider;
         private MeshRenderer _ghostBuildingMeshRenderer;
 
         private Dictionary<BuildingData, List<Building>> _placedBuildings = new();
         private void Initialize()
         {
-            _ghostBuildingCollider = ghostBuilding.GetComponent<BoxCollider>();
             _ghostBuildingMeshRenderer = ghostBuilding.GetComponent<MeshRenderer>();
             catalogUI.SetCatalog(buildingCatalog);
         }
@@ -66,19 +67,29 @@ namespace Core.Gameplay.Managers
 
         private void HandleCancelInput(InputAction.CallbackContext context)
         {
-            if (_selectedBuilding == null || !context.performed) return;
-            _selectedBuilding = null;
+            if (_selectedBuildingData == null || !context.performed) return;
+            _selectedBuildingData = null;
             catalogUI.Show();
             UpdateGhostBuilding();
         }
 
         private void HandleConfirmInput(InputAction.CallbackContext context)
         {
-            if (!context.performed || _selectedBuilding == null) return;
+            if (!context.performed) return;
 
-            if (CanPlace() && GameManager.Instance.SpendCurrency(_selectedBuilding.Cost))
+            if (_selectedBuildingData != null)
             {
-                PlaceBuilding();
+                if (CanPlace() && GameManager.Instance.SpendCurrency(_selectedBuildingData.Cost))
+                {
+                    PlaceBuilding();
+                }
+            } else if (_selectedBuilding != null)
+            {
+                if (GameManager.Instance.SpendCurrency(_selectedBuilding.GetUpgradeCost()))
+                {
+                    _selectedBuilding.LevelUp();
+                    buildingTooltip.UpdateData();
+                }
             }
         }
 
@@ -86,13 +97,13 @@ namespace Core.Gameplay.Managers
         {
             var building = Instantiate(buildingPrefab, ghostBuilding.position, ghostBuilding.rotation);
             
-            if (!_placedBuildings.ContainsKey(_selectedBuilding))
+            if (!_placedBuildings.ContainsKey(_selectedBuildingData))
             {
-                _placedBuildings.Add(_selectedBuilding, new ());    
+                _placedBuildings.Add(_selectedBuildingData, new ());    
             }
-            _placedBuildings[_selectedBuilding].Add(building);
-            building.Initialize(_selectedBuilding);
-            _selectedBuilding = null;
+            _placedBuildings[_selectedBuildingData].Add(building);
+            building.Initialize(_selectedBuildingData);
+            _selectedBuildingData = null;
             UpdateGhostBuilding();
         }
 
@@ -112,8 +123,10 @@ namespace Core.Gameplay.Managers
         {
             if (!context.performed) return;
             _lastPositionInput = context.ReadValue<Vector2>();
+            TooltipRaycast(_lastPositionInput);
             UpdateGhostBuilding();
         }
+        
 
         private void HandleBuildModeInput(InputAction.CallbackContext context)
         {
@@ -123,19 +136,19 @@ namespace Core.Gameplay.Managers
         
         private void HandleOnSelectBuilding(BuildingData data)
         {
-            _selectedBuilding = data;
+            _selectedBuildingData = data;
             catalogUI.Hide();
         }
 
         private void UpdateGhostBuilding()
         {
-            if (_selectedBuilding == null)
+            if (_selectedBuildingData == null)
             {
                 ghostBuilding.gameObject.SetActive(false);
                 return;
             }
             ghostBuilding.gameObject.SetActive(true);
-            ghostBuilding.localScale = _selectedBuilding.Size;
+            ghostBuilding.localScale = _selectedBuildingData.Size;
             var offset = Vector3.zero;
             offset.y = ghostBuilding.localScale.y / 2f;
             var ray = gameCamera.ScreenPointToRay(_lastPositionInput);
@@ -144,7 +157,32 @@ namespace Core.Gameplay.Managers
                 ghostBuilding.position = offset + hit.point;
             }
 
-            _ghostBuildingMeshRenderer.material.color = CanPlace() && GameManager.Instance.HasCurrency(_selectedBuilding.Cost) ? availableColor : unavailableColor;
+            _ghostBuildingMeshRenderer.material.color = CanPlace() && GameManager.Instance.HasCurrency(_selectedBuildingData.Cost) ? availableColor : unavailableColor;
+        }
+        
+        private void TooltipRaycast(Vector2 screenPos)
+        {
+            if (_selectedBuildingData != null) return;
+            var ray = gameCamera.ScreenPointToRay(screenPos);
+            if (Physics.Raycast(ray, out var hit, 1000, buildingLayerMask, QueryTriggerInteraction.Ignore))
+            {
+                if (hit.transform.TryGetComponent(out Building building))
+                {
+                    UnityEngine.Debug.Log($"{building.LoadedData.Name}");
+                    buildingTooltip.SetBuilding(building, screenPos, gameCamera);
+                    _selectedBuilding = building;
+                }
+                else
+                {
+                    buildingTooltip.Clear();
+                    _selectedBuilding = null;
+                }
+            }
+            else
+            {
+                buildingTooltip.Clear();
+                _selectedBuilding = null;
+            }
         }
     }
 }

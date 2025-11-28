@@ -15,11 +15,13 @@ namespace Core.Gameplay.Entities.Buildings
         [SerializeField] private MuzzleType muzzleType;
         [SerializeField] private Projectile projectilePrefab;
         [SerializeField] private float priceIncreasePerBuilding;
-        [SerializeField] private float upgradeBoost = 0.2f;
+        [SerializeField] private EntityAttributes upgradeBoost;
+        [SerializeField] private Vector2 deteriorationRange;
         
         public string Name => buildingName;
         public string Description => buildingDescription;
         public float Cost => GetCost();
+        public float BaseCost => buildingCost;
 
         private float GetCost()
         {
@@ -36,5 +38,9 @@ namespace Core.Gameplay.Entities.Buildings
         public MuzzleType MuzzleType => muzzleType;
         public Projectile ProjectilePrefab => projectilePrefab;
         public float PriceIncreasePerBuilding => priceIncreasePerBuilding;
+
+        public EntityAttributes UpgradeBoost => upgradeBoost;
+
+        public Vector2 DeteriorationRange => deteriorationRange;
     }
 }

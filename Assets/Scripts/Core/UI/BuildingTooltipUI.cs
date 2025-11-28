@@ -27,12 +27,22 @@ namespace Core.UI
 
         public void Clear()
         {
-            _currentBuilding = null;
+            if (_currentBuilding != null)
+            {
+                buildingUI.Clear();
+                _currentBuilding = null;
+            }
+
             if (isActive && !_isHiding)
             {
                 _isHiding = true;
                 Hide();
             }
+        }
+
+        public void UpdateData()
+        {
+            buildingUI.UpdateData(_currentBuilding);
         }
     }
 }

@@ -3,7 +3,7 @@ using Utilities;
 
 namespace Core.UI
 {
-    public abstract class UIController : UIPopup
+    public class UIController : UIPopup
     {
         [GetComponent] protected CanvasGroup CanvasGroup;
 

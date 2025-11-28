@@ -17,14 +17,20 @@ MonoBehaviour:
     damage: 12
     attackSpeed: 1
     range: 50
-  color: {r: 0.3218979, g: 0.9150943, b: 0.22877358, a: 1}
-  material: {fileID: 2100000, guid: 72411ac389dedb64ca89f9637b6472c0, type: 2}
+  color: {r: 0.22119948, g: 0.5, b: 0.1768868, a: 1}
+  material: {fileID: 2100000, guid: 7d9c95a074690574c9646c8535164795, type: 2}
   buildingName: Elven Hightower
   buildingDescription: Elves equipped with longbows. Their farsight and piercing
     shots are very remarkable.
   buildingCost: 30
-  buildingSize: {x: 1, y: 4, z: 1}
+  buildingSize: {x: 2, y: 7, z: 2}
   shooterType: 0
   muzzleType: 1
   projectilePrefab: {fileID: 1421108624332560070, guid: 9cc27147a8f7d9d4188fbf82aa08f88c, type: 3}
   priceIncreasePerBuilding: 0.8
+  upgradeBoost:
+    health: 0.15
+    damage: 0.3
+    attackSpeed: 0.1
+    range: 0.1
+  deteriorationRange: {x: 2.5, y: 8.25}
