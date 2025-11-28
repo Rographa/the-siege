@@ -28,7 +28,6 @@ namespace Core.Gameplay.Managers
         [SerializeField] private BuildManager buildManager;
         [SerializeField] private Spawner spawner;
         [SerializeField] private Bastion bastion;
-        [SerializeField] private List<WaveData> waveList;
         [SerializeField] private TextMeshProUGUI currencyText;
         [SerializeField] private TextMeshProUGUI waveNumberText;
         [SerializeField] private UIController gameOverScreen;
@@ -301,14 +300,14 @@ namespace Core.Gameplay.Managers
         {
             if (_currentWave != null)
             {
-                var tmp = new List<WaveData>(waveList);
+                var tmp = new List<WaveData>(config.WaveList);
                 if (tmp.Count > 1)
                 {
                     tmp.Remove(_currentWave);
                 }
                 return tmp[Random.Range(0, tmp.Count)];
             }
-            return waveList[Random.Range(0, waveList.Count)];
+            return config.WaveList[Random.Range(0, config.WaveList.Count)];
         }
 
         public static int GetBuildingCount(BuildingData data)

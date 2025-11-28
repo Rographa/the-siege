@@ -1,4 +1,6 @@
-﻿using Core.Gameplay.Entities.Buildings;
+﻿using System.Collections.Generic;
+using Core.Gameplay.Entities.Buildings;
+using Core.Gameplay.Waves;
 using UnityEngine;
 
 namespace Core.Gameplay.Configs
@@ -8,6 +10,7 @@ namespace Core.Gameplay.Configs
     {
         [Header("References")] 
         [SerializeField] private BastionData bastionData;
+        [SerializeField] private List<WaveData> waveList;
         
         [Header("Spawn Properties")]
         [SerializeField] private float spawnInterval = 0.5f;
@@ -26,6 +29,7 @@ namespace Core.Gameplay.Configs
         [SerializeField] private float upgradeGrowthRate = 1.5f;
 
         public BastionData BastionData => bastionData;
+        public List<WaveData> WaveList => waveList;
         public float SpawnInterval => spawnInterval;
         public float SpawnPosX => spawnPosX;
         public float SpawnPosY => spawnPosY;
