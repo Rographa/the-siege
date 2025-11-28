@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade63b95de4746efbc17b4438f792ad7, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  bastionData: {fileID: 11400000, guid: 8e8b0144c968f7d4f8033bfe4e45bfa3, type: 2}
+  waveList:
+  - {fileID: 11400000, guid: c8bfc97c25907584ea34dd8b12e6259f, type: 2}
+  - {fileID: 11400000, guid: f14aeed13f1c4bf4c8aeabac34d7e143, type: 2}
+  - {fileID: 11400000, guid: ed7c5d15c8bbd7c49a777c7dfe018ff1, type: 2}
+  - {fileID: 11400000, guid: ca6f619ecb0507e4e908b3f31ba43403, type: 2}
+  - {fileID: 11400000, guid: 75ac8a3969caac1419a55e6cb292a49a, type: 2}
+  - {fileID: 11400000, guid: 46e137f018c77ad42817bd6cff120b5a, type: 2}
+  - {fileID: 11400000, guid: 8ac47b4578abacf44b64960e9b132d45, type: 2}
+  - {fileID: 11400000, guid: d22d93fc4392bdd48a3c64b4579f6ad1, type: 2}
+  spawnInterval: 0.5
+  spawnPosX: 45
+  spawnPosY: 1
+  spawnRangeZ: {x: -10, y: 10}
+  startCurrency: 50
+  spawnMultiplierInterval: 5
+  spawnMultiplierIncrease: 0.5
+  difficultyMultiplierInterval: 10
+  difficultyMultiplierIncrease: 0.3
+  upgradeBaseCost: 80
+  upgradeGrowthRate: 1.5

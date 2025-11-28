@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8493bd61a8354f8da400dec2a8399a03, type: 3}
+  m_Name: WizardTowerData
+  m_EditorClassIdentifier: 
+  attributes:
+    health: 100
+    damage: 4
+    attackSpeed: 1.5
+    range: 25
+  color: {r: 0.19290671, g: 0.5176586, b: 0.8018868, a: 1}
+  material: {fileID: 2100000, guid: 7d9c95a074690574c9646c8535164795, type: 2}
+  buildingName: Wizard Tower
+  buildingDescription: Powerful wizards that cast lightning strikes into incoming
+    enemies.
+  buildingCost: 25
+  buildingSize: {x: 3, y: 16, z: 3}
+  shooterType: 1
+  muzzleType: 0
+  projectilePrefab: {fileID: 0}
+  priceIncreasePerBuilding: 0.7
+  upgradeBoost:
+    health: 0.2
+    damage: 0.2
+    attackSpeed: 0.3
+    range: 0.1
+  deteriorationRange: {x: 5, y: 9.25}
