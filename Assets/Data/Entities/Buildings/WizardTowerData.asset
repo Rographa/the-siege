@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attributes:
     health: 100
-    damage: 2.5
+    damage: 4
     attackSpeed: 1.5
     range: 25
   color: {r: 0.19290671, g: 0.5176586, b: 0.8018868, a: 1}
@@ -22,8 +22,10 @@ MonoBehaviour:
   buildingName: Wizard Tower
   buildingDescription: Powerful wizards that cast lightning strikes into incoming
     enemies.
-  buildingCost: 0
+  buildingCost: 25
   buildingSize: {x: 3, y: 16, z: 3}
   shooterType: 1
   muzzleType: 0
   projectilePrefab: {fileID: 0}
+  priceIncreasePerBuilding: 0.7
+  upgradeBoost: 0.2

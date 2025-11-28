@@ -36,12 +36,34 @@ namespace Core.UI
             buildingAttackSpeed.SetText($"{AttackSpeed}{data.AttackSpeed:N1}");
             buildingRange.SetText($"{Range}{data.Range:N1}");
             buildingHealth.SetText($"{Health}{data.Health:N1}");
-            buildingCost.SetText($"${data.Cost}");
+            UpdateCost(data.Cost);
             foreach (var background in backgrounds)
             {
                 background.color = data.Color;    
             }
             button.onClick.AddListener(() => OnSelected?.Invoke(_buildingData));
+        }
+
+        public void UpdateCost(float newCost)
+        {
+            buildingCost.SetText($"${newCost:0.00}");
+        }
+
+        public void SetBuilding(Building building)
+        {
+            _buildingData = building.LoadedData;
+            buildingName.SetText(_buildingData.Name);
+            buildingDescription.SetText(_buildingData.Description);
+            buildingDamage.SetText($"{Damage}{building.Damage:N1}");
+            buildingAttackSpeed.SetText($"{AttackSpeed}{building.AttackSpeed:N1}");
+            buildingRange.SetText($"{Range}{building.Range:N1}");
+            buildingHealth.SetText($"{Health}{building.Health:N1}");
+            buildingCost.transform.parent.gameObject.SetActive(false);
+            foreach (var background in backgrounds)
+            {
+                background.color = _buildingData.Color;    
+            }
+            button.enabled = false;
         }
     }
 }

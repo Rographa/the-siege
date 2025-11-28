@@ -17,3 +17,7 @@ MonoBehaviour:
   spawnPosX: 45
   spawnPosY: 1
   spawnRangeZ: {x: -10, y: 10}
+  spawnMultiplierInterval: 5
+  spawnMultiplierIncrease: 0.5
+  difficultyMultiplierInterval: 10
+  difficultyMultiplierIncrease: 0.3

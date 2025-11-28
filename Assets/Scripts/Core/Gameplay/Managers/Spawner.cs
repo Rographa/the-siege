@@ -7,9 +7,9 @@ namespace Core.Gameplay.Managers
     {
         [SerializeField] private GameObject unitPrefab;
 
-        public Unit SpawnUnit(UnitData data, Vector3 position)
+        public Unit SpawnUnit(UnitData data, Vector3 position, float difficultyMultiplier = 1f)
         {
-            return Instantiate(unitPrefab, position, Quaternion.identity, transform).GetComponent<Unit>().Initialize(data);
+            return Instantiate(unitPrefab, position, Quaternion.identity, transform).GetComponent<Unit>().Initialize(data, difficultyMultiplier);
         }
     }
 }

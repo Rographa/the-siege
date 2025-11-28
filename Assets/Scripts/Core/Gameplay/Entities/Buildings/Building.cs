@@ -15,7 +15,8 @@ namespace Core.Gameplay.Entities.Buildings
         [SerializeField] protected SphereCollider rangeCollider;
         [SerializeField] protected string enemyTag = "Enemy";
         [SerializeField] protected Shooter shooter;
-        [GetComponent] protected MeshRenderer MeshRenderer;
+        [SerializeField] protected Transform visuals;
+        [GetComponent(true)] protected MeshRenderer MeshRenderer;
 
         protected List<Unit> EnemiesInRange = new();
 
@@ -47,7 +48,7 @@ namespace Core.Gameplay.Entities.Buildings
 
         private void SetSize(Vector3 size)
         {
-            transform.localScale = size;
+            visuals.localScale = size;
             transform.position = new(transform.position.x, size.y / 2, transform.position.z);
         }
 
@@ -58,17 +59,15 @@ namespace Core.Gameplay.Entities.Buildings
             {
                 while (EnemiesInRange.Count > 0)
                 {
-                    while (Target == null)
-                    {
-                        GetNextTarget();
-                        yield return new WaitForEndOfFrame();
-                    }
-
                     while (LastAttackTime > Time.time)
                     {
                         yield return new WaitForEndOfFrame();
                     }
-                    
+                    while (Target == null || Target.IsDead)
+                    {
+                        yield return new WaitForEndOfFrame();
+                        GetNextTarget();
+                    }
                     Attack();
                     LastAttackTime = Time.time + attackCooldown;
                 }

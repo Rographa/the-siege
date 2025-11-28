@@ -54,17 +54,17 @@ namespace Core.Gameplay.Entities.Components
 
         private void Shoot_Projectile(IDamageable target)
         {
-            var muzzle = GetMuzzle();
+            var muzzle = GetMuzzle(target);
             var position = muzzle.position;
             var direction = (target.GetTransform().position - position).normalized;
             
-            var instance = Instantiate(prefab, position, prefab.transform.rotation);
+            var instance = Instantiate(prefab, position, Quaternion.identity);
             instance.Initialize(direction, _parent.Damage);
         }
         
         private void Shoot_Ray(IDamageable target)
         {
-            var muzzle = GetMuzzle();
+            var muzzle = GetMuzzle(target);
 
             if (_vfxCoroutine != null) StopCoroutine(_vfxCoroutine);
             _vfxCoroutine = StartCoroutine(RayVFX(target.GetTransform().position, muzzle.position));
@@ -85,8 +85,9 @@ namespace Core.Gameplay.Entities.Components
             lineRenderer.enabled = false;
         }
 
-        private Transform GetMuzzle()
+        private Transform GetMuzzle(IDamageable target)
         {
+            return muzzles.OrderBy(x => Vector3.Distance(x.position, target.GetTransform().position)).First();
             switch (muzzleType)
             {
                 case MuzzleType.Sequenced:

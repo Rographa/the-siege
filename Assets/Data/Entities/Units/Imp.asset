@@ -17,5 +17,7 @@ MonoBehaviour:
     damage: 4
     attackSpeed: 0.5
     range: 1
-  moveSpeed: 4
   color: {r: 0.7924528, g: 0.17568529, b: 0.17568529, a: 1}
+  material: {fileID: 0}
+  moveSpeed: 4
+  currencyRewardRange: {x: 1, y: 4}

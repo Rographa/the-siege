@@ -9,8 +9,11 @@ namespace Core.Gameplay.Managers
 {
     public class BuildManager : MonoBehaviour
     {
+        [SerializeField] private Color availableColor;
+        [SerializeField] private Color unavailableColor;
         [SerializeField] private Building buildingPrefab;
-        [SerializeField] private LayerMask buildableLayer;
+        [SerializeField] private LayerMask obstacleLayerMask;
+        [SerializeField] private LayerMask buildableLayerMask;
         [SerializeField] private Transform ghostBuilding;
         [SerializeField] private Camera gameCamera;
         [SerializeField] private List<BuildingData> buildingCatalog;
@@ -18,8 +21,14 @@ namespace Core.Gameplay.Managers
 
         private BuildingData _selectedBuilding;
         private Vector2 _lastPositionInput;
+        private BoxCollider _ghostBuildingCollider;
+        private MeshRenderer _ghostBuildingMeshRenderer;
+
+        private Dictionary<BuildingData, List<Building>> _placedBuildings = new();
         private void Initialize()
         {
+            _ghostBuildingCollider = ghostBuilding.GetComponent<BoxCollider>();
+            _ghostBuildingMeshRenderer = ghostBuilding.GetComponent<MeshRenderer>();
             catalogUI.SetCatalog(buildingCatalog);
         }
         
@@ -67,16 +76,36 @@ namespace Core.Gameplay.Managers
         {
             if (!context.performed || _selectedBuilding == null) return;
 
-            PlaceBuilding();
+            if (CanPlace() && GameManager.Instance.SpendCurrency(_selectedBuilding.Cost))
+            {
+                PlaceBuilding();
+            }
         }
 
         private void PlaceBuilding()
         {
             var building = Instantiate(buildingPrefab, ghostBuilding.position, ghostBuilding.rotation);
+            
+            if (!_placedBuildings.ContainsKey(_selectedBuilding))
+            {
+                _placedBuildings.Add(_selectedBuilding, new ());    
+            }
+            _placedBuildings[_selectedBuilding].Add(building);
             building.Initialize(_selectedBuilding);
-
             _selectedBuilding = null;
             UpdateGhostBuilding();
+        }
+
+        public bool CanPlace()
+        {
+            return Physics.OverlapBox(ghostBuilding.position, ghostBuilding.localScale / 2, ghostBuilding.rotation,
+                obstacleLayerMask, QueryTriggerInteraction.Ignore).Length == 0;
+        }
+
+        public int GetBuildingCount(BuildingData data)
+        {
+            if (!_placedBuildings.ContainsKey(data)) return 0;
+            return _placedBuildings[data].Count;
         }
 
         private void HandlePositionInput(InputAction.CallbackContext context)
@@ -110,10 +139,12 @@ namespace Core.Gameplay.Managers
             var offset = Vector3.zero;
             offset.y = ghostBuilding.localScale.y / 2f;
             var ray = gameCamera.ScreenPointToRay(_lastPositionInput);
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000, buildableLayer))
+            if (Physics.Raycast(ray, out var hit, 1000, buildableLayerMask))
             {
                 ghostBuilding.position = offset + hit.point;
             }
+
+            _ghostBuildingMeshRenderer.material.color = CanPlace() && GameManager.Instance.HasCurrency(_selectedBuilding.Cost) ? availableColor : unavailableColor;
         }
     }
 }

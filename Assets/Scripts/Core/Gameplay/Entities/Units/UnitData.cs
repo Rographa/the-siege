@@ -6,7 +6,10 @@ namespace Core.Gameplay.Entities.Units
     public class UnitData : EntityData
     {
         [SerializeField] private float moveSpeed;
+        [SerializeField] private Vector2 currencyRewardRange;
 
         public float MoveSpeed => moveSpeed;
+        public Vector2 CurrencyRewardRange => currencyRewardRange;
+
     }
 }

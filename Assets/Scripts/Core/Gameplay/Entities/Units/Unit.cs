@@ -3,6 +3,7 @@ using System.Collections;
 using Core.Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Core.Gameplay.Entities.Units
 {
@@ -14,14 +15,14 @@ namespace Core.Gameplay.Entities.Units
         private UnitData _loadedData;
         private Coroutine _coroutine;
 
-        public Unit Initialize(UnitData data)
+        public Unit Initialize(UnitData data, float difficultyMultiplier = 1f)
         {
             if (IsInitialized) return this;
             _loadedData = data;
-            Health = _loadedData.Health;
-            Damage = _loadedData.Damage;
-            AttackSpeed = _loadedData.AttackSpeed;
-            agent.speed = _loadedData.MoveSpeed;
+            Health = _loadedData.Health * difficultyMultiplier;
+            Damage = _loadedData.Damage * difficultyMultiplier;
+            AttackSpeed = _loadedData.AttackSpeed * difficultyMultiplier;
+            agent.speed = _loadedData.MoveSpeed * difficultyMultiplier;
             Range = _loadedData.Range;
             //agent.stoppingDistance = _loadedData.Range;
             
@@ -72,6 +73,11 @@ namespace Core.Gameplay.Entities.Units
                 Attack();
                 LastAttackTime = Time.time + attackCooldown;
             }
+        }
+
+        public float GetReward(float multiplier = 1f)
+        {
+            return Random.Range(_loadedData.CurrencyRewardRange.x, _loadedData.CurrencyRewardRange.y) * multiplier;
         }
 
         public override void Die()

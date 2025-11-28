@@ -184,7 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7675435404712745093, guid: b0703326f4fa1a44bae78cccb0395ea9, type: 3}
       propertyPath: eulerOffset.x
-      value: 90
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675435404712745093, guid: b0703326f4fa1a44bae78cccb0395ea9, type: 3}
+      propertyPath: eulerOffset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7675435404712745093, guid: b0703326f4fa1a44bae78cccb0395ea9, type: 3}
       propertyPath: eulerOffset.z
