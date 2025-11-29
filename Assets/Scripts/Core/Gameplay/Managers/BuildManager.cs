@@ -164,21 +164,35 @@ namespace Core.Gameplay.Managers
         {
             if (_selectedBuildingData != null) return;
             var ray = gameCamera.ScreenPointToRay(screenPos);
-            if (Physics.Raycast(ray, out var hit, 1000, buildingLayerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.SphereCast(ray, 0.2f, out var hit, 1000, buildingLayerMask, QueryTriggerInteraction.Ignore))
             {
                 if (hit.transform.TryGetComponent(out Building building))
                 {
-                    buildingTooltip.SetBuilding(building, screenPos, gameCamera);
-                    _selectedBuilding = building;
+                    if (!buildingTooltip.isActive && buildingTooltip.phase != UIPopup.TransitionPhase.FadingIn)
+                    {
+                        buildingTooltip.Show();
+                    }
+                    if (buildingTooltip.SetBuilding(building, screenPos, gameCamera))
+                    {
+                        _selectedBuilding = building;
+                    }
                 }
                 else
                 {
+                    if (buildingTooltip.isActive && buildingTooltip.phase != UIPopup.TransitionPhase.FadingOut)
+                    {
+                        buildingTooltip.Hide();
+                    }
                     buildingTooltip.Clear();
                     _selectedBuilding = null;
                 }
             }
             else
             {
+                if (buildingTooltip.isActive && buildingTooltip.phase != UIPopup.TransitionPhase.FadingOut)
+                {
+                    buildingTooltip.Hide();
+                }
                 buildingTooltip.Clear();
                 _selectedBuilding = null;
             }

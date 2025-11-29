@@ -17,7 +17,7 @@ MonoBehaviour:
     damage: 12
     attackSpeed: 1
     range: 50
-  color: {r: 0.22119948, g: 0.5, b: 0.1768868, a: 1}
+  color: {r: 0.08627451, g: 0.8, b: 0.23529412, a: 1}
   material: {fileID: 2100000, guid: 7d9c95a074690574c9646c8535164795, type: 2}
   buildingName: Elven Hightower
   buildingDescription: Elves equipped with longbows. Their farsight and piercing

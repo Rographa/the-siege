@@ -11,7 +11,16 @@ namespace Core.UI
         public UnityEvent OnShow;
         public UnityEvent OnHide;
         public bool isActive;
+        public TransitionPhase phase;
         protected Coroutine FadeCoroutine;
+
+        [Serializable]
+        public enum TransitionPhase
+        {
+            None,
+            FadingIn,
+            FadingOut
+        }
 
         public virtual void Show()
         {
@@ -19,6 +28,7 @@ namespace Core.UI
         }
         protected virtual void Show_Internal()
         {
+            phase = TransitionPhase.FadingIn;
             Fade(true, OnShowCallback);
         }
         public virtual void InstantShow()
@@ -32,6 +42,7 @@ namespace Core.UI
         }
         protected virtual void Hide_Internal()
         {
+            phase = TransitionPhase.FadingOut;
             Fade(false, OnHideCallback);    
         }
         
@@ -115,6 +126,7 @@ namespace Core.UI
             }
             SetVisibility(endValue, value);
             callback?.Invoke();
+            phase = TransitionPhase.None;
         }
 
         
