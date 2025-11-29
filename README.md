@@ -103,6 +103,7 @@ to behave as expected. Their major difference is that Buildings have the Shooter
 to perform projectile or ray attacks against the enemy, while Units have NavMeshAgent component, which allows them to 
 move to the target in order to attack it.
 
+---
 ## Conclusion
 
 I really loved to develop this game! Although it's pretty simple at the moment, I'd love to put some extra time on it
@@ -111,7 +112,9 @@ and see what it could be. I'm a fan of tower-defense games and it felt great des
 I'm really proud and happy by accomplishing this project by the scope of 72 hours. 
 
 Feel free to reach me out:
+
 Email: gobiraphael@gmail.com
+
 LinkedIn: https://www.linkedin.com/in/raphaelgobi
 
 Thank you for reading and I hope you enjoy **The Siege**!
