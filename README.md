@@ -33,6 +33,7 @@ of the buildings in the battlefield anymore.
 | Gatling Turret  | 20   | 100    | 1.5    | 6            | 15    | Min: 4.25 Max: 10 |
 | Elven Hightower | 30   | 100    | 12     | 1            | 50    | Min: 3.5  Max: 14 |
 | Wizard Tower    | 25   | 100    | 4      | 1.5          | 25    | Min: 5  Max: 12   |
+
 _*Multiplied by Difficulty Multiplier_
 
 Upgrades may be bought to enhance the Building stats and recover its health to maximum.
@@ -55,6 +56,7 @@ Enemies will constantly spawn and try to reach the Bastion; when they succeed, t
 | Golem    | 200     | 20      | 0.1           | 1     | 1.8  | 1           | Min: 6  Max: 15 |
 | Imp      | 20      | 4       | 0.5           | 1     | 0.6  | 4           | Min: 1  Max: 4  |
 | Orc      | 120     | 10      | 0.2           | 1     | 1.25 | 1.5         | Min: 4  Max: 12 |
+
 _*Multiplied by Difficulty Multiplier_
 
 These will grow stronger in stats and quantity while the game continues, with the following multipliers:
