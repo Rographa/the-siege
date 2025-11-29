@@ -26,13 +26,12 @@ Buildings, except the Bastion, will deteriorate for every passed wave in a rando
 the building is destroyed. When that happens, the cost for that building will also decrease, as it doesn't count as one 
 of the buildings in the battlefield anymore.
 
-| Name            | Cost | Health | Damage | Attack Speed | Range | Deterioration*      |
-|-----------------|------|--------|--------|--------------|-------|---------------------|
-| Bastion         | 80   | 200    | 15     | 0.7          | 50    | 0                   |
-| Gatling Turret  | 20   | 100    | 1.5    | 6            | 15    | Min: 1.25 Max: 3    |
-| Elven Hightower | 30   | 100    | 12     | 1            | 50    | Min: 2.5  Max: 8.25 |
-| Wizard Tower    | 25   | 100    | 4      | 1.5          | 25    | Min: 5  Max: 9.25   |
-
+| Name            | Cost | Health | Damage | Attack Speed | Range | Deterioration*    |
+|-----------------|------|--------|--------|--------------|-------|-------------------|
+| Bastion         | 80   | 200    | 15     | 0.7          | 50    | 0                 |
+| Gatling Turret  | 20   | 100    | 1.5    | 6            | 15    | Min: 4.25 Max: 10 |
+| Elven Hightower | 30   | 100    | 12     | 1            | 50    | Min: 3.5  Max: 14 |
+| Wizard Tower    | 25   | 100    | 4      | 1.5          | 25    | Min: 5  Max: 12   |
 _*Multiplied by Difficulty Multiplier_
 
 Upgrades may be bought to enhance the Building stats and recover its health to maximum.

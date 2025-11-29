@@ -25,12 +25,11 @@ MonoBehaviour:
   buildingCost: 25
   buildingSize: {x: 3, y: 16, z: 3}
   shooterType: 1
-  muzzleType: 0
   projectilePrefab: {fileID: 0}
-  priceIncreasePerBuilding: 0.7
+  priceIncreasePerBuilding: 0.9
   upgradeBoost:
     health: 0.2
     damage: 0.2
     attackSpeed: 0.3
     range: 0.1
-  deteriorationRange: {x: 5, y: 9.25}
+  deteriorationRange: {x: 5, y: 12}

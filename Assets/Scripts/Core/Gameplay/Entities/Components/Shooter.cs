@@ -15,7 +15,6 @@ namespace Core.Gameplay.Entities.Components
         
         [SerializeField] private Projectile prefab;
         [SerializeField] private ShooterType shooterType;
-        [SerializeField] private MuzzleType muzzleType;
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private List<Transform> muzzles;
 
@@ -33,7 +32,6 @@ namespace Core.Gameplay.Entities.Components
                 prefab = building.LoadedData.ProjectilePrefab;
             }
             shooterType = building.LoadedData.ShooterType;
-            muzzleType = building.LoadedData.MuzzleType;
             lineRenderer.startColor = lineRenderer.endColor = building.LoadedData.Color;
         }
 
@@ -88,38 +86,6 @@ namespace Core.Gameplay.Entities.Components
         private Transform GetMuzzle(IDamageable target)
         {
             return muzzles.OrderBy(x => Vector3.Distance(x.position, target.GetTransform().position)).First();
-            switch (muzzleType)
-            {
-                case MuzzleType.Sequenced:
-                    if (_currentMuzzle is null)
-                    {
-                        _currentMuzzle = muzzles.FirstOrDefault();
-                    }
-                    else
-                    {
-                        var index = muzzles.IndexOf(_currentMuzzle) + 1;
-                        if (index >= muzzles.Count) index = 0;
-                        _currentMuzzle = muzzles[index];
-                    }
-                    break;
-                case MuzzleType.Random:
-                    if (_currentMuzzle is null)
-                    {
-                        _currentMuzzle = muzzles[Random.Range(0, muzzles.Count)];
-                        break;
-                    }
-
-                    var tmp = muzzles.Where(x => x != _currentMuzzle).ToList();
-                    if (tmp.Count > 0)
-                    {
-                        _currentMuzzle = tmp[Random.Range(0, tmp.Count)];
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            return _currentMuzzle;
         }
     }
 
@@ -128,12 +94,5 @@ namespace Core.Gameplay.Entities.Components
     {
         Projectile,
         Ray
-    }
-
-    [Serializable]
-    public enum MuzzleType
-    {
-        Sequenced,
-        Random
     }
 }

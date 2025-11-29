@@ -12,7 +12,6 @@ namespace Core.Gameplay.Entities.Buildings
         [SerializeField] private float buildingCost;
         [SerializeField] private Vector3 buildingSize = Vector3.one;
         [SerializeField] private ShooterType shooterType;
-        [SerializeField] private MuzzleType muzzleType;
         [SerializeField] private Projectile projectilePrefab;
         [SerializeField] private float priceIncreasePerBuilding;
         [SerializeField] private EntityAttributes upgradeBoost;
@@ -35,7 +34,6 @@ namespace Core.Gameplay.Entities.Buildings
 
         public Vector3 Size => buildingSize;
         public ShooterType ShooterType => shooterType;
-        public MuzzleType MuzzleType => muzzleType;
         public Projectile ProjectilePrefab => projectilePrefab;
         public float PriceIncreasePerBuilding => priceIncreasePerBuilding;
 

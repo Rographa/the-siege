@@ -107,7 +107,7 @@ namespace Core.Gameplay.Managers
             UpdateGhostBuilding();
         }
 
-        public bool CanPlace()
+        private bool CanPlace()
         {
             return Physics.OverlapBox(ghostBuilding.position, ghostBuilding.localScale / 2, ghostBuilding.rotation,
                 obstacleLayerMask, QueryTriggerInteraction.Ignore).Length == 0;
@@ -168,7 +168,6 @@ namespace Core.Gameplay.Managers
             {
                 if (hit.transform.TryGetComponent(out Building building))
                 {
-                    UnityEngine.Debug.Log($"{building.LoadedData.Name}");
                     buildingTooltip.SetBuilding(building, screenPos, gameCamera);
                     _selectedBuilding = building;
                 }

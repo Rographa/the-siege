@@ -87,7 +87,7 @@ namespace Core.UI
             buildingRange.SetText($"{Range}{building.Range:N1}");
             buildingHealth.SetText($"{Health}{building.Health:N1}");
             buildingCost.SetText($"{Level}{building.level:00}");
-            buildingLevelUpCost.SetText(string.Format(LevelUpCost, building.GetUpgradeCost()));
+            buildingLevelUpCost.SetText($"{string.Format(LevelUpCost, building.GetUpgradeCost().ToString("0.00"))}");
         }
 
         private void UpdateData(Entity entity)

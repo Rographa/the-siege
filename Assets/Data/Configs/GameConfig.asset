@@ -25,7 +25,7 @@ MonoBehaviour:
   spawnInterval: 0.5
   spawnPosX: 45
   spawnPosY: 1
-  spawnRangeZ: {x: -10, y: 10}
+  spawnRangeZ: {x: -40, y: 40}
   startCurrency: 50
   spawnMultiplierInterval: 5
   spawnMultiplierIncrease: 0.5
