@@ -8,6 +8,7 @@ players may place and upgrade buildings in order to protect their land.
 This project was made in 72 hours, where the goal was to create an easily-scalable tower defense game.
 
 ### Downloads
+[Download for Windows (ZIP)](https://github.com/Rographa/the-siege/releases/download/prototype/The.Siege.v0.1.zip)
 
 ---
 
