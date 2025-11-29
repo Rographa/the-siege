@@ -76,7 +76,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OrthoOutlineScale: 1
-    - _OutlineWidth: 0.02
+    - _OutlineWidth: 0.04
     - _Parallax: 0.02
     - _ShadowSmoothness: 0.1
     - _ShadowThreshold: 0.1
